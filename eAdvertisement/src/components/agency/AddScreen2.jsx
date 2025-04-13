@@ -35,6 +35,21 @@ export const AddScreen2 = () => {
   const {register, handleSubmit} = useForm();
   const navigate = useNavigate()
 
+  const validationSchema={
+    dimanstionValidator:{
+      required:{
+        value:true,
+        message:"required"
+      }
+    },
+    typeValidator:{
+      required:{
+        value:true,
+        message:"required"
+      }
+    }
+  }
+
   const submitHandler = async(data) => {
   data.userId = localStorage.getItem("id");
   console.log(data);
@@ -48,7 +63,7 @@ export const AddScreen2 = () => {
   formData.append("longitude",data.longitude);
   formData.append("stateId",data.stateId);
   formData.append("cityId",data.cityId);
-  formData.append("areaId",data.areaId);
+  // formData.append("areaId",data.areaId);
   formData.append("image",data.image[0]);
   formData.append("userId",data.userId)
 
@@ -71,11 +86,11 @@ export const AddScreen2 = () => {
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="mb-3">
               <label className="form-label">Hoarding Dimension</label>
-              <input type="text" className="form-control" {...register("hordingDimension")} />
+              <input type="text" className="form-control" {...register("hordingDimension",validationSchema.dimanstionValidator)} />
             </div>
             <div className="mb-3">
               <label className="form-label">Hoarding Type</label>
-              <select className="form-select" {...register("hordingType")}>
+              <select className="form-select" {...register("hordingType",validationSchema.typeValidator)}>
                 <option value="Unipole">Unipole</option>
                 <option value="Billboard">Billboard</option>
                 <option value="Gantry">Gantry</option>
@@ -126,7 +141,7 @@ export const AddScreen2 = () => {
                 ))}
               </select>
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label className="form-label">Select Area</label>
               <select className="form-select" {...register("areaId")}>
                 <option>SELECT AREA</option>
@@ -134,7 +149,7 @@ export const AddScreen2 = () => {
                   <option key={area._id} value={area._id}>{area.name}</option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <div className="mb-3">
                 <label className="form-label">Select HORDING URL</label>
                 <input type="file" {...register("image")}></input>

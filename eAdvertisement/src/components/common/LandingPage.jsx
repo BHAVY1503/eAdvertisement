@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "../../assets/landingPage.css";
 import "../../assets/landing/css/style.css";
@@ -6,8 +6,52 @@ import "../../assets/landing/css/responsiv.css";
 import about2image from "../../assets/landing/images/about-img2.png";
 import sliderImage from "../../assets/landing/images/slider-img.png";
 import { Link } from "react-router-dom";
+import { Bar, Pie, Scatter } from "react-chartjs-2";
+import { data } from "react-router-dom";
+import { ArcElement, BarElement, CategoryScale, Chart, LinearScale, PointElement } from "chart.js";
+import axios from "axios";
 
+
+Chart.register(CategoryScale,LinearScale,BarElement,ArcElement,PointElement)
 const LandingPage = () => {
+  
+  const [chartData, setchartData] = useState({
+    labels:[],
+    datasets:[
+        {
+            label:"Loading...",
+            data:[],
+            borderColor:"blue",
+            borderWidth:2,
+            backgroundColor:["red","blue","green"]
+
+        }
+    ]
+})
+
+useEffect(()=>{
+    getUserData()
+},[])
+
+const  getUserData = async()=>{
+
+    // const res = await axios.get("https://node5.onrender.com/user/user")
+    const res = await axios.get("http://localhost:3000/hording/getallhording")
+    console.log(res.data.data)
+    setchartData({
+        labels:res.data.data?.map((user)=>user.hordingType || "N/A"),
+        datasets:[
+            {
+                label:"User",
+                data:res.data.data?.map((user)=>user.hourlyRate || 0),
+                borderColor:"blue",
+                borderWidth:2,
+                backgroundColor:["red","green","blue","yellow"]
+            }
+        ]
+    })
+
+}
   return (
     <div className="hero_area">
       <header className="header_section">
@@ -101,18 +145,18 @@ const LandingPage = () => {
                         looking
                       </p>
                       <div className="btn-box">
-                        <a href="" className="btn-1">
+                        <a href="contactus" className="btn-1">
                           Contact Us
                         </a>
-                        <a href="" className="btn-2">
+                        {/* <a href="" className="btn-2">
                           Get A Quote
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="img-box">
-                      <img src={sliderImage} alt="" />
+                      {/* <img src={sliderImage} alt="" /> */}
                     </div>
                   </div>
                 </div>
@@ -184,15 +228,15 @@ const LandingPage = () => {
               role="button"
               data-slide="prev"
             >
-              <span className="sr-only">Previous</span>
+              {/* <span className="sr-only">Previous</span> */}
             </a>
             <a
               className="carousel-control-next"
-              href="#carouselExampleIndicators"
+              href="signup"
               role="button"
               data-slide="next"
             >
-              <span className="sr-only">Next</span>
+              {/* <span className="sr-only">Next</span> */}
             </a>
           </div>
         </div>
@@ -210,17 +254,42 @@ const LandingPage = () => {
                 <div className="heading_container">
                   <h2>About Us</h2>
                 </div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud
+                <p>We are a creative and results-driven advertising agency dedicated to helping businesses grow through innovative marketing strategies. Our team specializes in crafting compelling campaigns that engage audiences and drive success.
                 </p>
+                <p>
+                Our mission is to connect brands with their ideal customers through impactful advertisements. Whether it’s digital marketing, social media campaigns, or traditional advertising, we ensure every message reaches the right people at the right time.
+                </p>
+                <p>
+                <b>Join Us on the Journey:</b> 
+                  We believe in the power of storytelling and strategic branding. Let’s bring your vision to life and make an impact together!
+                </p>
+
                 <a href="">Read More</a>
               </div>
             </div>
           </div>
         </div>
       </section>
+      <div style={{display:'flex'}}>
+      <div className="login-card" style={{ textAlign: "center" }}>
+    <h1>SUCSESS CHART </h1>
+    <Bar data={chartData}></Bar>
+    {/* <Pie data={chartData}></Pie> */}
+    {/* <Scatter data={chartData}></Scatter> */}
+  </div>
+  <div className="login-card" style={{ textAlign: "center" }}>
+    <h1>SUCSESS CHART </h1>
+    {/* <Bar data={chartData}></Bar> */}
+    <Pie data={chartData}></Pie>
+    {/* <Scatter data={chartData}></Scatter> */}
+  </div>
+  <div className="login-card" style={{ textAlign: "center" }}>
+    <h1>SUCSESS CHART </h1>
+    {/* <Bar data={chartData}></Bar> */}
+    {/* <Pie data={chartData}></Pie> */}
+    <Scatter data={chartData}></Scatter>
+  </div>
+  </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { data, useNavigate } from "react-router-dom";
 import "../../assets/signup.css"
-export const Signup = () => {
+export const AgencySignup = () => {
   
   const { register, handleSubmit, formState:{errors}} = useForm();
   console.log(errors)
@@ -37,7 +37,7 @@ export const Signup = () => {
   }
   const submitHandler = async(data) => {
     console.log(data)
-    data.roleId = "67be9504b7cf31c821b7bb1a"
+    data.roleId = "67be8e2c331856f02c869273"
 
     const res = await axios.post("/user",data)
     console.log(res) //axiosobjec

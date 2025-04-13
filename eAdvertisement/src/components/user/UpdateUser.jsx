@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from "react-router-dom"
 
-export const UpdateMyscreen = () => {
+export const UpdateUser = () => {
     const id = useParams().id
   
   const [states, setstates] = useState([])
@@ -47,7 +47,8 @@ const submitHandler = async (data) => {
   // console.log(data);
   const res = await axios.put("/hording/updatehording/"+id, data);
     console.log(res.data);
-    navigate("/agency/myscreens")
+    // navigate("/user/userscreen")
+    navigate("/user/userscreen")
 };
 
     return (

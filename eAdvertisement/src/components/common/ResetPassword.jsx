@@ -12,13 +12,13 @@ export const ResetPassword = () => {
             token:token,
             password:data.password
         }
-        const res = await axios.post("/user/resetpassword", obj)
+        const res = await axios.post(`/user/resetpassword/${token}`, obj)
         console.log(res.data)
             
 
     }
   return (
-    <div>
+    <div className='login'>
         <h1>RESET PASSWOERD COMPONENT</h1>
         <form onSubmit={handleSubmit(submitHandler)}>
             <div>

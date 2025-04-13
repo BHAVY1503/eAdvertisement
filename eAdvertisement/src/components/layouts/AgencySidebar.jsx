@@ -29,7 +29,7 @@ export const AgencySidebar = () => {
               className="brand-image opacity-75 shadow"
             />
 
-            <span className="brand-text fw-light">AdminLTE 4</span>
+            <span className="brand-text fw-light">AdminLTE </span>
           </a>
         </div>
 
@@ -74,13 +74,35 @@ export const AgencySidebar = () => {
                     </Link>
                   </li>
                 </ul>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <Link to="userslist" className="nav-link active">
+                      <i className="nav-icon bi bi-speedometer" />
+                      <p>
+                        USRES LIST
+                        <i className="nav-arrow bi bi-chevron-right" />
+                      </p>
+                    </Link>
+                  </li>
+                </ul>
+                {/* <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <Link to="userslist" className="nav-link active">
+                      <i className="nav-icon bi bi-speedometer" />
+                      <p>
+                        USRES LIS
+                        <i className="nav-arrow bi bi-chevron-right" />
+                      </p>
+                    </Link>
+                  </li>
+                </ul> */}
               </li>
               
               <li className="nav-item">
-                <a href="#" className="nav-link">
+                <a href="hordinglist" className="nav-link">
                   <i className="nav-icon bi bi-box-seam-fill" />
                   <p>
-                    Widgets
+                    DASHBOARD
                     <i className="nav-arrow bi bi-chevron-right" />
                   </p>
                 </a>
