@@ -90,10 +90,10 @@ export const Signup = () => {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" {...register("password",validationSchema.passwordValidator)} placeholder="Enter password" />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="age">Age</label>
           <input type="number" id="age" {...register("age",validationSchema.ageValidator)} placeholder="Enter age" />
-        </div>
+        </div> */}
         <button type="submit" className="signup-btn">Sign Up</button>
       </form>
       <div className="signup-link">

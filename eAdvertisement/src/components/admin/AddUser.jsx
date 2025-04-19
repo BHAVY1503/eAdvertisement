@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { data, useNavigate } from "react-router-dom";
 import "../../assets/signup.css"
-export const AgencySignup = () => {
+export const AddUser = () => {
   
   const { register, handleSubmit, formState:{errors}} = useForm();
   console.log(errors)
@@ -37,14 +37,14 @@ export const AgencySignup = () => {
   }
   const submitHandler = async(data) => {
     console.log(data)
-    data.roleId = "67be8e2c331856f02c869273"
+    data.roleId = "67be9504b7cf31c821b7bb1a"
 
     const res = await axios.post("/user",data)
     console.log(res) //axiosobjec
     console.log(res.data) //api response...
  
     if(res.status===201){
-      alert("Singup Succsesfully")
+      alert("ADDED Succsesfully")
       navigate("/login")
       //user added..
       //naviget
@@ -69,8 +69,8 @@ export const AgencySignup = () => {
     <div className="login-card">
       <div className="brand">
         <div className="brand-logo"></div>
-        <h1>CREATE AGENCY ACCOUNT</h1>
-        <p>Sign up to get started</p>
+        <h1>ADD USER ACCOUNT</h1>
+        {/* <p>Sign up to get started</p> */}
       </div>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div className="form-group">
@@ -90,14 +90,14 @@ export const AgencySignup = () => {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" {...register("password",validationSchema.passwordValidator)} placeholder="Enter password" />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="age">Age</label>
           <input type="number" id="age" {...register("age",validationSchema.ageValidator)} placeholder="Enter age" />
-        </div>
+        </div> */}
         <button type="submit" className="signup-btn">ADD</button>
       </form>
       <div className="signup-link">
-        <p>Add User <a href="/adduser">ADD</a></p>
+        {/* <p>Already have an account? <a href="/login">Login</a></p> */}
       </div>
     </div>
   </div>

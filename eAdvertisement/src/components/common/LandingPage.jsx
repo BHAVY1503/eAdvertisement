@@ -15,6 +15,12 @@ import axios from "axios";
 Chart.register(CategoryScale,LinearScale,BarElement,ArcElement,PointElement)
 const LandingPage = () => {
   
+  
+  
+  
+  
+  
+  
   const [chartData, setchartData] = useState({
     labels:[],
     datasets:[
@@ -24,10 +30,13 @@ const LandingPage = () => {
             borderColor:"blue",
             borderWidth:2,
             backgroundColor:["red","blue","green"]
+            // generateColors:(res.data.data.length)
 
         }
     ]
 })
+
+
 
 useEffect(()=>{
     getUserData()
@@ -38,18 +47,36 @@ const  getUserData = async()=>{
     // const res = await axios.get("https://node5.onrender.com/user/user")
     const res = await axios.get("http://localhost:3000/hording/getallhording")
     console.log(res.data.data)
+    const hordingData = res.data.data;
+const labels = hordingData.map((user) => user.hordingType?.replace(/_/g, " ").toUpperCase() || "N/A");
+const hourlyRates = hordingData.map((user) => user.hourlyRate || 0);
+const colors = hourlyRates.map((_, i) => `hsl(${(i * 60) % 360}, 70%, 60%)`);
+    // setchartData({
+    //     labels:res.data.data?.map((user)=>user.hordingType || "N/A"),
+    //     datasets:[
+    //         {
+    //             label:"User",
+    //             data:res.data.data?.map((user)=>user.hourlyRate || 0),
+    //             borderColor:"blue",
+    //             borderWidth:2,
+    //             backgroundColor:["red","green","blue","yellow"]
+    //         }
+    //     ]
+    // })
     setchartData({
-        labels:res.data.data?.map((user)=>user.hordingType || "N/A"),
-        datasets:[
-            {
-                label:"User",
-                data:res.data.data?.map((user)=>user.hourlyRate || 0),
-                borderColor:"blue",
-                borderWidth:2,
-                backgroundColor:["red","green","blue","yellow"]
-            }
-        ]
-    })
+      labels: labels,
+      datasets: [
+        {
+          label: "Hourly Rate by Hording Type",
+          data: hourlyRates,
+          borderColor: "rgba(0,0,255,0.5)",
+          borderWidth: 2,
+          backgroundColor: colors,
+        },
+      ],
+    
+        },
+    );
 
 }
   return (
@@ -249,11 +276,13 @@ const  getUserData = async()=>{
                 <img src={about2image} alt="" />
               </div>
             </div>
+            
             <div className="col-md-6">
               <div className="detail-box">
                 <div className="heading_container">
                   <h2>About Us</h2>
                 </div>
+                <div className="">
                 <p>We are a creative and results-driven advertising agency dedicated to helping businesses grow through innovative marketing strategies. Our team specializes in crafting compelling campaigns that engage audiences and drive success.
                 </p>
                 <p>
@@ -262,36 +291,101 @@ const  getUserData = async()=>{
                 <p>
                 <b>Join Us on the Journey:</b> 
                   We believe in the power of storytelling and strategic branding. Let’s bring your vision to life and make an impact together!
-                </p>
+                </p><br/>
+                <p>1. Our Vision :
+                 "To revolutionize the way businesses advertise by offering a seamless, tech-driven platform that connects advertisers with their ideal audience in real-time."</p>
 
-                <a href="">Read More</a>
+                <p>2. What We Do :<br/>
+                Provide a dynamic platform for businesses to book digital hoardings and banners.<br/>
+
+                 Offer tailored ad placement based on location, audience demographics, and analytics.<br/>
+
+                 Track advertisement performance using data visualization (as seen in your charts).</p>
+
+                <p>3. Why Choose Us :<br/>
+                🌐 Digital First: Our platform is built for modern businesses looking to reach wider audiences.<br/>
+                📊 Data-Driven Insights: Real-time analytics to track your ad’s performance.<br/>
+
+                🤝 Transparency & Control: Businesses can choose ad slots, see rates, and manage schedules.<br/>
+
+                ⏱ Time-Saving: No more back-and-forth with vendors—we bring everything into one platform.</p>
+                </div>
+                <a href="signup">Explore Our Service</a>
               </div>
             </div>
           </div>
         </div>
+        
       </section>
-      <div style={{display:'flex'}}>
+    
+  
+      {/* <div style={{display:'flex'}}>
       <div className="login-card" style={{ textAlign: "center" }}>
     <h1>SUCSESS CHART </h1>
     <Bar data={chartData}></Bar>
-    {/* <Pie data={chartData}></Pie> */}
-    {/* <Scatter data={chartData}></Scatter> */}
+    <Bar
+  data={chartData}
+  options={{
+    plugins: {
+      title: {
+        display: true,
+        text: "Hourly Rate Distribution (Bar Chart)",
+        font: { size: 18 },
+      },
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Hourly Rate (₹)",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Hording Type",
+        },
+      },
+    },
+  }}
+/>
+
   </div>
   <div className="login-card" style={{ textAlign: "center" }}>
     <h1>SUCSESS CHART </h1>
-    {/* <Bar data={chartData}></Bar> */}
     <Pie data={chartData}></Pie>
-    {/* <Scatter data={chartData}></Scatter> */}
   </div>
   <div className="login-card" style={{ textAlign: "center" }}>
     <h1>SUCSESS CHART </h1>
-    {/* <Bar data={chartData}></Bar> */}
-    {/* <Pie data={chartData}></Pie> */}
     <Scatter data={chartData}></Scatter>
   </div>
   </div>
-    </div>
-  );
+    </div> */}
+    {/* <div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+  gap: '20px',
+  padding: '40px'
+}}>
+  <div className="login-card" style={{ textAlign: "center" }}>
+    <h2>Bar Chart</h2>
+    <Bar data={chartData} options={{ plugins: { title: { display: true, text: "Hourly Rates - Bar" }, legend: { display: false } }, scales: { y: { beginAtZero: true } } }} />
+  </div>
+  <div className="login-card" style={{ textAlign: "center" }}>
+    <h2>Pie Chart</h2>
+    <Pie data={chartData} options={{ plugins: { title: { display: true, text: "Hourly Rates - Pie" } } }} />
+  </div>
+  <div className="login-card" style={{ textAlign: "center" }}>
+    <h2>Scatter Chart</h2>
+    <Scatter data={chartData} options={{ plugins: { title: { display: true, text: "Hourly Rates - Scatter" } }, scales: { x: { title: { display: true, text: "Hording Index" } }, y: { title: { display: true, text: "Hourly Rate (₹)" }, beginAtZero: true } } }} />
+  </div> */}
+</div>
+// </div>
+);
 };
 
 export default LandingPage;

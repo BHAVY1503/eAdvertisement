@@ -24,81 +24,37 @@ export const Login = () => {
     }
   },
 }
-const submitHandler = async(data) => {
- 
-  data.roleId = "67be9504b7cf31c821b7bb1a"
-  const res = await axios.post("/user/login",data)
-  console.log(res) //axiosobjec
-  console.log(res.data) //api response...
+const submitHandler = async (data) => {
+  data.roleId = "67be9504b7cf31c821b7bb1a";
 
-  if(res.status === 200){
-    alert("Login Succsesfully")
-    localStorage.setItem("id",res.data.data._id)
-    localStorage.setItem("role", res.data.data.roleId.name)
-  } if(res.data.data.roleId.name === "USER"){
-     navigate("/user")
+  try {
+    const res = await axios.post("/user/login", data);
+    console.log(res); // axios response object
+    console.log(res.data); // API response data
+
+    if (res.status === 200) {
+      alert("Login Successfully");
+      localStorage.setItem("id", res.data.data._id);
+      localStorage.setItem("role", res.data.data.roleId.name);
+
+      // Redirect based on role
+      if (res.data.data.roleId.name === "USER") {
+        navigate("/user");
+      } else if (res.data.data.roleId.name === "Agency") {
+        navigate("/agency");
+      }
+    }
+  } catch (err) {
+    console.error("Login Error:", err);
+    
+    // Show alert based on server message or generic one
+    if (err.response && err.response.data && err.response.data.message) {
+      alert(err.response.data.message); // e.g., "invalid cred.." or "Email not found.."
+    } else {
+      alert("Login failed. Please try again.");
+    }
   }
-  if(res.data.data.roleId.name === "Agency"){
-  navigate("/agency")
- } 
-  else{
-    // alert("login fail")
-    //user not added..
-    //login..
-  }
-}
-  // const submitHandler = async(data) => {
- 
-  //   data.roleId = "67be9504b7cf31c821b7bb1a"
-  //   const res = await axios.post("/user/login",data)
-   
-  //   console.log(res) //axiosobjec
-  //   console.log(res.data) //api response...
- 
-  //   if(res.status === 200){
-  //     alert("Login Succsesfully")
-  //     localStorage.setItem("token", token);
-  
-  //     // Decode token
-  //     // const decoded = jwtDecode(token);
-
-  //     // console.log("Decoded Token:", decoded);
-  
-  //     // Store useful user info
-  //     // localStorage.setItem("id", decoded.id);
-  //     // localStorage.setItem("role", decoded.role);
-  
-  //     // Route by role
-  //     if (decoded.role === "USER") {
-  //       navigate("/user");
-  //     } else if (decoded.role === "Agency") {
-  //       navigate("/agency");
-  //     } else {
-  //       alert("Role not recognized");
-  //     }
-  //   } else {
-  //     alert("Login failed");
-  //   }
- 
-  // const submitHandler = async (data) => {
-  //   try {
-  //     const res = await axios.post("/user/login", data);
-  //     console.log(res.data.token)
-  //     localStorage.setItem("token",res.data.token)
-      
-  //   } catch (error) {
-  //     alert("Login Failed");
-  //   }
-  // };
-
-  // const userApi = async()=>{
-
-  //   axios.get("url",{
-  //     headers:{
-  //       "Authorization":"Beaer "+localStorage.getItem("token")
-  //     }
-  //   })
-  // }
+};
 
 
   return (
@@ -133,7 +89,7 @@ const submitHandler = async(data) => {
               <input type="checkbox" id="remember" />
               <label htmlFor="remember">Remember Me</label>
             </div>
-            <a href={`resetpassword`} className="forgot-password">
+            <a href='/forgot-password' className="forgot-password">
               Forgot Password?
             </a>
           </div>

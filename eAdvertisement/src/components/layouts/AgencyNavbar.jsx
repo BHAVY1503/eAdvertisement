@@ -59,8 +59,13 @@ export const AgencyNavbar = ({ toggleSidebar }) => {
             </a>
           </li>
           <li className="nav-item d-none d-md-block">
-            <a href="contactus" className="nav-link">
+            <a href="/contactus" className="nav-link">
               Contact
+            </a>
+          </li>
+          <li className="nav-item d-none d-md-block">
+            <a href="/" className="nav-link">
+              LogOut
             </a>
           </li>
         </ul>

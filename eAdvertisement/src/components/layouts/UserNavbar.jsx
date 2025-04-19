@@ -149,6 +149,11 @@ export const UserNavbar = ({ toggleSidebar }) => {
               Contact
             </a>
           </li>
+          <li className="nav-item d-none d-md-block">
+            <a href="/" className="nav-link">
+              LogOut
+            </a>
+          </li>
         </ul>
 
        

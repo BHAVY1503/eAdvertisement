@@ -22,11 +22,11 @@ export const AgencySidebar = () => {
         data-bs-theme="dark"
       >
         <div className="sidebar-brand">
-          <a href="./index.html" className="brand-link">
+          <a href="/agency" className="brand-link">
             <img
-              src="../../dist/assets/img/AdminLTELogo.png"
+              // src="../../dist/assets/img/AdminLTELogo.png"
               // alt="AdminLTE Logo"
-              className="brand-image opacity-75 shadow"
+              // className="brand-image opacity-75 shadow"
             />
 
             <span className="brand-text fw-light">AdminLTE </span>
@@ -68,7 +68,7 @@ export const AgencySidebar = () => {
                     <Link to="myscreens" className="nav-link active">
                       <i className="nav-icon bi bi-speedometer" />
                       <p>
-                        VIEW MY SCREENS
+                        VIEW USERS SCREENS
                         <i className="nav-arrow bi bi-chevron-right" />
                       </p>
                     </Link>
@@ -80,6 +80,28 @@ export const AgencySidebar = () => {
                       <i className="nav-icon bi bi-speedometer" />
                       <p>
                         USRES LIST
+                        <i className="nav-arrow bi bi-chevron-right" />
+                      </p>
+                    </Link>
+                  </li>
+                </ul>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <Link to="agencysignup" className="nav-link active">
+                      <i className="nav-icon bi bi-speedometer" />
+                      <p>
+                        ADD AGENCY
+                        <i className="nav-arrow bi bi-chevron-right" />
+                      </p>
+                    </Link>
+                  </li>
+                </ul>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <Link to="/agency" className="nav-link active">
+                      <i className="nav-icon bi bi-speedometer" />
+                      <p>
+                        DASHBOARD
                         <i className="nav-arrow bi bi-chevron-right" />
                       </p>
                     </Link>
@@ -99,13 +121,13 @@ export const AgencySidebar = () => {
               </li>
               
               <li className="nav-item">
-                <a href="hordinglist" className="nav-link">
+                {/* <a href="/agency" className="nav-link">
                   <i className="nav-icon bi bi-box-seam-fill" />
                   <p>
                     DASHBOARD
                     <i className="nav-arrow bi bi-chevron-right" />
                   </p>
-                </a>
+                </a> */}
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
                     <a href="./widgets/small-box.html" className="nav-link">

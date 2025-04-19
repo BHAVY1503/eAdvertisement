@@ -36,6 +36,10 @@ import { UserNavbar } from './components/layouts/UserNavbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Users } from './components/admin/Users'
 import { UserAction } from './components/admin/UserAction'
+import UserDashboard from './components/user/UserDashboard'
+import AgencyDashboard from './components/admin/Agencydashboard'
+import { AddUser } from './components/admin/AddUser'
+import { ForgotPassword } from './components/common/ForgotPassword'
 
 function App() {
    axios.defaults.baseURL = "http://localhost:3000"
@@ -43,7 +47,7 @@ function App() {
    const location = useLocation();
 
    useEffect(() => {
-     if (location.pathname === "/login" || location.pathname === "/signup"  || location.pathname === "/agencylogin" ||location.pathname === "/contactus" || location.pathname === "/agencysignup") {
+     if (location.pathname === "/login" || location.pathname === "/signup"  || location.pathname === "/agencylogin" ||location.pathname === "/contactus" || location.pathname === "/agencysignup"  || location.pathname === "/adduser") {
        document.body.className = ""; // Remove the unwanted class for login and signup
      } else { 
        document.body.className =
@@ -52,32 +56,37 @@ function App() {
    }, [location.pathname]);
 
   return (
-      <div className={location.pathname === "/login" || location.pathname === "/signup"  || location.pathname === "/agencylogin" || location.pathname === "/contactus" || location.pathname === "/agencysignup" ? "" : "app-wrapper"}>
+      <div className={location.pathname === "/login" || location.pathname === "/signup"  || location.pathname === "/agencylogin" || location.pathname === "/contactus" || location.pathname === "/adduser"  ? "" : "app-wrapper"}>
       <Routes>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/agencylogin' element={<AgencyLogin/>}></Route>
-        <Route path='/agencysignup' element={<AgencySignup/>}></Route>
+        <Route path='/adduser' element={<AddUser/>}></Route>
+
+        {/* <Route path='/agencysignup' element={<AgencySignup/>}></Route> */}
         <Route path='/' element={<LandingPage/>}></Route>
         {/* <Route path='/hordinglist' element={<HordingList/>}></Route> */}
         {/* <Route path='/dashboard' element={<DashBoard/>}></Route> */}
         {/* <Route path='/resetpassword' element={<ResetPassword/>}></Route> */}
         <Route path='/resetpassword/:token' element={<ResetPassword/>}></Route>
+        <Route path="/forgot-password" element={<ForgotPassword/>}></Route>
         <Route path='/contactus' element={<ContactUs/>}></Route>
 
 
         <Route path='' element={<PrivateRoutes/>}>
         <Route path='/user' element={<UserSidebar/>}>
+        <Route index element={<UserDashboard/>} />
         {/* <Route path='usernavbar' element={<UserNavbar/>}></Route> */}
         <Route path='userprofile' element={<UserProfile/>}></Route>
-        <Route path='userscreen/:id' element={<UserScreen/>}></Route>
+        <Route path='userscreen' element={<UserScreen/>}></Route>
         <Route path='updateuser/:id' element={<UpdateUser/>}></Route>
         <Route path='userhording' element={<UserHording/>}></Route>
         <Route path='dashboard' element={<DashBoard/>}></Route>
         {/* <Route path='/login' element={<Login/>}></Route> */}
-
         </Route>
         <Route path='/agency' element={<AgencySidebar/>}>
+        <Route index element={<AgencyDashboard/>} />
+
         {/* <Route path='addscreen' element={<AddScreen/>}></Route> */}
         <Route path='addscreen2' element={<AddScreen2/>}></Route>
         <Route path='myscreens' element={<ViewMyScreens/>}></Route>
@@ -85,6 +94,8 @@ function App() {
         <Route path='hordinglist' element={<HordingList/>}></Route>
         <Route path='userslist' element={<Users/>}></Route>
         <Route path='useraction' element={<UserAction/>}></Route>
+        <Route path='agencysignup' element={<AgencySignup/>}></Route>
+
 
 
         </Route>

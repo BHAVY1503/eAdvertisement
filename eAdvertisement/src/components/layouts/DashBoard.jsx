@@ -1,5 +1,4 @@
 import React from 'react'
-// import Card from 'react-bootstrap/Card';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -12,19 +11,13 @@ import { requirePropFactory } from '@mui/material';
 import about2image from "../../assets/landing/images/work-img.png";
 import { Link } from 'react-router-dom';
 
-
- 
- 
-
-
-
 export const DashBoard = () => {
     const divStyle = {
         backgroundImage: `url(${about2image})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '100vh',
-      };
+    };
   return (
     <div style={{}}>
       <div style={{backgroundColor:'',textAlign:'center',color:'#F53F52'}} >
@@ -101,16 +94,16 @@ export const DashBoard = () => {
             </Card.Body>
           </Card>
         </Col>
-      ))}
+      ))} 
     </Row>
   
-
+  
     </div>
-        
+  )}
   
 
-  )
-}
+//   
+// 
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
 // import { Bar, Pie, Scatter } from "react-chartjs-2";

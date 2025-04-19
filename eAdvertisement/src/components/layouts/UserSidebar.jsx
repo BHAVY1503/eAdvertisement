@@ -69,9 +69,22 @@ export const UserSidebar = () => {
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
                     <Link to="userscreen" className="nav-link active">
-                      <i className="nav-icon bi bi-speedometer" />
+                      {/* <i className="nav-icon bi bi-speedometer" /> */}
+                      {/* <i className="bi bi-tv-fill me-2"/> */}
                       <p>
                         VIEW MY SCREENS
+                        <i className="nav-arrow bi bi-chevron-right" />
+                      </p>
+                    </Link>
+                  </li>
+                </ul>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <Link to="/user" className="nav-link active">
+                      {/* <i className="nav-icon bi bi-speedometer" /> */}
+                      {/* <i className="bi bi-tv-fill me-2"/> */}
+                      <p>
+                        DASHBOARD
                         <i className="nav-arrow bi bi-chevron-right" />
                       </p>
                     </Link>
@@ -117,6 +130,7 @@ export const UserSidebar = () => {
                   
                 {/* </li> */}
               </li>
+             
             </ul>
             
           </nav>
@@ -124,9 +138,13 @@ export const UserSidebar = () => {
 
       </aside>
       {/* <div style={{backgroundColor:'red'}}>hll</div> */}
-      <main class="app-main">
+      {/* <main className="app-main">
         <Outlet></Outlet>
-      </main>
+      </main> */}
+      <main class="app-main">
+  <Outlet></Outlet>
+</main>
+
     </>
   );
 };
